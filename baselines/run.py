@@ -90,6 +90,7 @@ def build_env(args):
     nenv = args.num_env or ncpu
     alg = args.alg
     seed = args.seed
+    self_attn = args.self_attention
 
     env_type, env_id = get_env_type(args.env)
 
@@ -143,7 +144,7 @@ def build_env(args):
             if args.custom_reward_path == '':
                 assert False, 'no path for reward model'
             else:
-                env = W.VecPyTorchAtariReward(env, args.custom_reward_path, env_name)
+                env = W.VecPyTorchAtariReward(env, args.custom_reward_path, env_name, self_attn)
         else:
             assert False, 'no such wrapper exist'
 
